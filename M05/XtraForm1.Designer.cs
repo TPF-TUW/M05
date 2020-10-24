@@ -376,6 +376,7 @@
             this.gvCurrency.OptionsBehavior.ReadOnly = true;
             this.gvCurrency.OptionsView.ShowGroupPanel = false;
             this.gvCurrency.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gvCurrency_RowCellClick);
+            this.gvCurrency.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.gvCurrency_RowStyle);
             // 
             // Root
             // 

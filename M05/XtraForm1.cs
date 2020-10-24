@@ -7,6 +7,7 @@ using DBConnection;
 using MDS00;
 using System.Drawing;
 using DevExpress.XtraPrinting;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace M05
 {
@@ -106,12 +107,12 @@ namespace M05
                         sbSQL.Append("IF NOT EXISTS(SELECT OIDCURR FROM Currency WHERE OIDCURR = N'" + txeID.Text.Trim() + "') ");
                         sbSQL.Append(" BEGIN ");
                         sbSQL.Append("  INSERT INTO Currency(Currency, CreateBy, CreateDate) ");
-                        sbSQL.Append("  VALUES(N'" + txeCurrency.Text.Trim() + "', '" + strCREATE + "', GETDATE()) ");
+                        sbSQL.Append("  VALUES(N'" + txeCurrency.Text.Trim().Replace("'", "''") + "', '" + strCREATE + "', GETDATE()) ");
                         sbSQL.Append(" END ");
                         sbSQL.Append("ELSE ");
                         sbSQL.Append(" BEGIN ");
                         sbSQL.Append("  UPDATE Currency SET ");
-                        sbSQL.Append("      Currency = N'" + txeCurrency.Text.Trim() + "' ");
+                        sbSQL.Append("      Currency = N'" + txeCurrency.Text.Trim().Replace("'", "''") + "' ");
                         sbSQL.Append("  WHERE(OIDCURR = '" + txeID.Text.Trim() + "') ");
                         sbSQL.Append(" END ");
                         //MessageBox.Show(sbSQL.ToString());
@@ -149,7 +150,7 @@ namespace M05
                 if (txeCurrency.Text.Trim() != "" && lblStatus.Text == "* Add Currency")
                 {
                     StringBuilder sbSQL = new StringBuilder();
-                    sbSQL.Append("SELECT TOP(1) Currency FROM Currency WHERE (Currency = N'" + txeCurrency.Text.Trim() + "') ");
+                    sbSQL.Append("SELECT TOP(1) Currency FROM Currency WHERE (Currency = N'" + txeCurrency.Text.Trim().Replace("'", "''") + "') ");
                     if (new DBQuery(sbSQL).getString() != "")
                     {
                         FUNC.msgWarning("Duplicate currency. !! Please Change.");
@@ -162,7 +163,7 @@ namespace M05
                     StringBuilder sbSQL = new StringBuilder();
                     sbSQL.Append("SELECT TOP(1) OIDCURR ");
                     sbSQL.Append("FROM Currency ");
-                    sbSQL.Append("WHERE (Currency = N'" + txeCurrency.Text.Trim() + "') ");
+                    sbSQL.Append("WHERE (Currency = N'" + txeCurrency.Text.Trim().Replace("'", "''") + "') ");
                     string strCHK = new DBQuery(sbSQL).getString();
                     if (strCHK != "" && strCHK != txeID.Text.Trim())
                     {
@@ -190,6 +191,30 @@ namespace M05
             string pathFile = new ObjSet.Folder(@"C:\MDS\Export\").GetPath() + "CurrencyList_" + DateTime.Now.ToString("yyyyMMdd") + ".xlsx";
             gvCurrency.ExportToXlsx(pathFile);
             System.Diagnostics.Process.Start(pathFile);
+        }
+
+        private void gvCurrency_RowStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs e)
+        {
+            if (sender is GridView)
+            {
+                GridView gView = (GridView)sender;
+                if (!gView.IsValidRowHandle(e.RowHandle)) return;
+                int parent = gView.GetParentRowHandle(e.RowHandle);
+                if (gView.IsGroupRow(parent))
+                {
+                    for (int i = 0; i < gView.GetChildRowCount(parent); i++)
+                    {
+                        if (gView.GetChildRowHandle(parent, i) == e.RowHandle)
+                        {
+                            e.Appearance.BackColor = i % 2 == 0 ? Color.AliceBlue : Color.White;
+                        }
+                    }
+                }
+                else
+                {
+                    e.Appearance.BackColor = e.RowHandle % 2 == 0 ? Color.AliceBlue : Color.White;
+                }
+            }
         }
     }
 }
