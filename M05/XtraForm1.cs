@@ -123,8 +123,8 @@ namespace M05
                                 bool chkSAVE = new DBQuery(sbSQL).runSQL();
                                 if (chkSAVE == true)
                                 {
-                                    FUNC.msgInfo("Save complete.");
                                     bbiNew.PerformClick();
+                                    FUNC.msgInfo("Save complete.");   
                                 }
                             }
                             catch (Exception)
@@ -138,7 +138,12 @@ namespace M05
 
         private void txeCurrency_LostFocus(object sender, EventArgs e)
         {
-            
+            bool chkDup = chkDuplicate();
+            if (chkDup == false)
+            {
+                txeCurrency.Text = "";
+                txeCurrency.Focus();
+            }
         }
 
         private bool chkDuplicate()
@@ -176,15 +181,6 @@ namespace M05
             return chkDup;
         }
 
-        private void txeCurrency_Leave(object sender, EventArgs e)
-        {
-            bool chkDup = chkDuplicate();
-            if (chkDup == false)
-            {
-                txeCurrency.Text = "";
-                txeCurrency.Focus();
-            }
-        }
 
         private void bbiExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -214,6 +210,14 @@ namespace M05
                 {
                     e.Appearance.BackColor = e.RowHandle % 2 == 0 ? Color.AliceBlue : Color.White;
                 }
+            }
+        }
+
+        private void txeCurrency_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txeID.Focus();
             }
         }
     }
