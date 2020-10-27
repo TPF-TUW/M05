@@ -104,17 +104,29 @@ namespace M05
                             strCREATE = txeCREATE.Text.Trim();
                         }
 
-                        sbSQL.Append("IF NOT EXISTS(SELECT OIDCURR FROM Currency WHERE OIDCURR = N'" + txeID.Text.Trim() + "') ");
-                        sbSQL.Append(" BEGIN ");
-                        sbSQL.Append("  INSERT INTO Currency(Currency, CreateBy, CreateDate) ");
-                        sbSQL.Append("  VALUES(N'" + txeCurrency.Text.Trim().Replace("'", "''") + "', '" + strCREATE + "', GETDATE()) ");
-                        sbSQL.Append(" END ");
-                        sbSQL.Append("ELSE ");
-                        sbSQL.Append(" BEGIN ");
-                        sbSQL.Append("  UPDATE Currency SET ");
-                        sbSQL.Append("      Currency = N'" + txeCurrency.Text.Trim().Replace("'", "''") + "' ");
-                        sbSQL.Append("  WHERE(OIDCURR = '" + txeID.Text.Trim() + "') ");
-                        sbSQL.Append(" END ");
+                        if (lblStatus.Text == "* Add Currency")
+                        {
+                            sbSQL.Append("  INSERT INTO Currency(Currency, CreateBy, CreateDate) ");
+                            sbSQL.Append("  VALUES(N'" + txeCurrency.Text.Trim().Replace("'", "''") + "', '" + strCREATE + "', GETDATE()) ");
+                        }
+                        else if (lblStatus.Text == "* Edit Currency")
+                        {
+                            sbSQL.Append("  UPDATE Currency SET ");
+                            sbSQL.Append("      Currency = N'" + txeCurrency.Text.Trim().Replace("'", "''") + "' ");
+                            sbSQL.Append("  WHERE(OIDCURR = '" + txeID.Text.Trim() + "') ");
+                        }
+
+                        //sbSQL.Append("IF NOT EXISTS(SELECT OIDCURR FROM Currency WHERE OIDCURR = N'" + txeID.Text.Trim() + "') ");
+                        //sbSQL.Append(" BEGIN ");
+                        //sbSQL.Append("  INSERT INTO Currency(Currency, CreateBy, CreateDate) ");
+                        //sbSQL.Append("  VALUES(N'" + txeCurrency.Text.Trim().Replace("'", "''") + "', '" + strCREATE + "', GETDATE()) ");
+                        //sbSQL.Append(" END ");
+                        //sbSQL.Append("ELSE ");
+                        //sbSQL.Append(" BEGIN ");
+                        //sbSQL.Append("  UPDATE Currency SET ");
+                        //sbSQL.Append("      Currency = N'" + txeCurrency.Text.Trim().Replace("'", "''") + "' ");
+                        //sbSQL.Append("  WHERE(OIDCURR = '" + txeID.Text.Trim() + "') ");
+                        //sbSQL.Append(" END ");
                         //MessageBox.Show(sbSQL.ToString());
                         if (sbSQL.Length > 0)
                         {
