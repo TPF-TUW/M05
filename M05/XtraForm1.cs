@@ -70,14 +70,7 @@ namespace M05
 
         private void gvCurrency_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
         {
-            lblStatus.Text = "* Edit Currency";
-            lblStatus.ForeColor = Color.Red;
-
-            txeID.Text = gvCurrency.GetFocusedRowCellValue("No").ToString();
-            txeCurrency.Text = gvCurrency.GetFocusedRowCellValue("Currency").ToString();
-
-            txeCREATE.Text = gvCurrency.GetFocusedRowCellValue("CreateBy").ToString();
-            txeDATE.Text = gvCurrency.GetFocusedRowCellValue("CreateDate").ToString();
+            
             
         }
 
@@ -212,6 +205,18 @@ namespace M05
             {
                 txeID.Focus();
             }
+        }
+
+        private void gvCurrency_RowClick(object sender, RowClickEventArgs e)
+        {
+            lblStatus.Text = "* Edit Currency";
+            lblStatus.ForeColor = Color.Red;
+
+            txeID.Text = gvCurrency.GetFocusedRowCellValue("No").ToString();
+            txeCurrency.Text = gvCurrency.GetFocusedRowCellValue("Currency").ToString();
+
+            txeCREATE.Text = gvCurrency.GetFocusedRowCellValue("CreateBy").ToString();
+            txeDATE.Text = gvCurrency.GetFocusedRowCellValue("CreateDate").ToString();
         }
     }
 }
