@@ -218,5 +218,15 @@ namespace M05
             txeCREATE.Text = gvCurrency.GetFocusedRowCellValue("CreateBy").ToString();
             txeDATE.Text = gvCurrency.GetFocusedRowCellValue("CreateDate").ToString();
         }
+
+        private void bbiPrintPreview_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            gcCurrency.ShowPrintPreview();
+        }
+
+        private void bbiPrint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            gcCurrency.Print();
+        }
     }
 }

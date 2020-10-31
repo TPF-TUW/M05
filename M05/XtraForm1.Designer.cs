@@ -131,6 +131,7 @@
             this.bbiPrintPreview.Id = 14;
             this.bbiPrintPreview.ImageOptions.ImageUri.Uri = "Preview";
             this.bbiPrintPreview.Name = "bbiPrintPreview";
+            this.bbiPrintPreview.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiPrintPreview_ItemClick);
             // 
             // bsiRecordsCount
             // 
@@ -177,6 +178,7 @@
             this.bbiPrint.Id = 20;
             this.bbiPrint.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("bbiPrint.ImageOptions.SvgImage")));
             this.bbiPrint.Name = "bbiPrint";
+            this.bbiPrint.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiPrint_ItemClick);
             // 
             // bbiSave
             // 
@@ -317,30 +319,30 @@
             // 
             // txeDATE
             // 
-            this.txeDATE.Location = new System.Drawing.Point(90, 378);
+            this.txeDATE.Location = new System.Drawing.Point(99, 378);
             this.txeDATE.MenuManager = this.ribbonControl;
             this.txeDATE.Name = "txeDATE";
             this.txeDATE.Properties.ReadOnly = true;
-            this.txeDATE.Size = new System.Drawing.Size(250, 20);
+            this.txeDATE.Size = new System.Drawing.Size(241, 20);
             this.txeDATE.StyleController = this.layoutControl1;
             this.txeDATE.TabIndex = 9;
             // 
             // txeCREATE
             // 
-            this.txeCREATE.Location = new System.Drawing.Point(90, 354);
+            this.txeCREATE.Location = new System.Drawing.Point(99, 354);
             this.txeCREATE.MenuManager = this.ribbonControl;
             this.txeCREATE.Name = "txeCREATE";
             this.txeCREATE.Properties.ReadOnly = true;
-            this.txeCREATE.Size = new System.Drawing.Size(250, 20);
+            this.txeCREATE.Size = new System.Drawing.Size(241, 20);
             this.txeCREATE.StyleController = this.layoutControl1;
             this.txeCREATE.TabIndex = 8;
             // 
             // txeCurrency
             // 
-            this.txeCurrency.Location = new System.Drawing.Point(90, 28);
+            this.txeCurrency.Location = new System.Drawing.Point(99, 28);
             this.txeCurrency.MenuManager = this.ribbonControl;
             this.txeCurrency.Name = "txeCurrency";
-            this.txeCurrency.Size = new System.Drawing.Size(250, 20);
+            this.txeCurrency.Size = new System.Drawing.Size(241, 20);
             this.txeCurrency.StyleController = this.layoutControl1;
             this.txeCurrency.TabIndex = 7;
             this.txeCurrency.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txeCurrency_KeyDown);
@@ -348,11 +350,11 @@
             // 
             // txeID
             // 
-            this.txeID.Location = new System.Drawing.Point(90, 4);
+            this.txeID.Location = new System.Drawing.Point(99, 4);
             this.txeID.MenuManager = this.ribbonControl;
             this.txeID.Name = "txeID";
             this.txeID.Properties.ReadOnly = true;
-            this.txeID.Size = new System.Drawing.Size(127, 20);
+            this.txeID.Size = new System.Drawing.Size(118, 20);
             this.txeID.StyleController = this.layoutControl1;
             this.txeID.TabIndex = 5;
             // 
