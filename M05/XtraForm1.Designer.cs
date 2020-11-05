@@ -346,6 +346,7 @@
             this.txeCurrency.StyleController = this.layoutControl1;
             this.txeCurrency.TabIndex = 7;
             this.txeCurrency.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txeCurrency_KeyDown);
+            this.txeCurrency.Leave += new System.EventHandler(this.txeCurrency_Leave);
             this.txeCurrency.LostFocus += new System.EventHandler(this.txeCurrency_LostFocus);
             // 
             // txeID

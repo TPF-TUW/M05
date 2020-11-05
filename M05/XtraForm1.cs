@@ -143,12 +143,7 @@ namespace M05
 
         private void txeCurrency_LostFocus(object sender, EventArgs e)
         {
-            bool chkDup = chkDuplicate();
-            if (chkDup == false)
-            {
-                txeCurrency.Text = "";
-                txeCurrency.Focus();
-            }
+            
         }
 
         private bool chkDuplicate()
@@ -163,8 +158,6 @@ namespace M05
                     sbSQL.Append("SELECT TOP(1) Currency FROM Currency WHERE (Currency = N'" + txeCurrency.Text.Trim().Replace("'", "''") + "') ");
                     if (new DBQuery(sbSQL).getString() != "")
                     {
-                        FUNC.msgWarning("Duplicate currency. !! Please Change.");
-                        txeCurrency.Text = "";
                         chkDup = false;
                     }
                 }
@@ -177,8 +170,6 @@ namespace M05
                     string strCHK = new DBQuery(sbSQL).getString();
                     if (strCHK != "" && strCHK != txeID.Text.Trim())
                     {
-                        FUNC.msgWarning("Duplicate currency. !! Please Change.");
-                        txeCurrency.Text = "";
                         chkDup = false;
                     }
                 }
@@ -227,6 +218,21 @@ namespace M05
         private void bbiPrint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             gcCurrency.Print();
+        }
+
+        private void txeCurrency_Leave(object sender, EventArgs e)
+        {
+            if (txeCurrency.Text.Trim() != "")
+            {
+                bool chkDup = chkDuplicate();
+                if (chkDup == false)
+                {
+                    txeCurrency.Text = "";
+                    txeCurrency.Focus();
+                    FUNC.msgWarning("Duplicate currency. !! Please Change.");
+
+                }
+            }
         }
     }
 }
