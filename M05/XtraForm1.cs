@@ -200,6 +200,7 @@ namespace M05
 
         private void gvCurrency_RowClick(object sender, RowClickEventArgs e)
         {
+            if (gvCurrency.IsFilterRow(e.RowHandle)) return;
             lblStatus.Text = "* Edit Currency";
             lblStatus.ForeColor = Color.Red;
 
