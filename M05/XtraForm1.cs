@@ -85,7 +85,7 @@ namespace M05
             {
                 txeCurrency.Text = txeCurrency.Text.ToUpper().Trim();
                 bool chkCURR = chkDuplicate();
-                
+
                 if (chkCURR == true)
                 {
                     if (FUNC.msgQuiz("Confirm save data ?") == true)
@@ -129,13 +129,19 @@ namespace M05
                                 if (chkSAVE == true)
                                 {
                                     bbiNew.PerformClick();
-                                    FUNC.msgInfo("Save complete.");   
+                                    FUNC.msgInfo("Save complete.");
                                 }
                             }
                             catch (Exception)
                             { }
                         }
                     }
+                }
+                else
+                {
+                    txeCurrency.Text = "";
+                    txeCurrency.Focus();
+                    FUNC.msgWarning("Duplicate currency. !! Please Change.");
                 }
             }
 
